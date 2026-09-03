@@ -1,0 +1,6 @@
+---
+# vars file for webrole
+#
+app_doc_root: "/var/www/web_app_new"
+web_package: "httpd"
+

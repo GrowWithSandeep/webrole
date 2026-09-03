@@ -1,0 +1,6 @@
+---
+# defaults file for webrole
+#
+app_doc_root: "/var/www/my_app"
+web_package: "httpd"
+

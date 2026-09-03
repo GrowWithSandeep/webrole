@@ -1,0 +1,38 @@
+---
+
+- name: run common firewall setup
+  include_role:
+    name: firewall
+  loop:
+    - 80
+    - 443  
+
+- name: Deploy application safely
+  block:
+    - name: Copy new release
+      ansible.builtin.copy:
+        src: app_release.tar.gz
+        dest: /opt/app/release.tar.gz
+
+    - name: Extract release
+      ansible.builtin.unarchive:
+        src: /opt/app/release.tar.gz
+        dest: /opt/app/
+        remote_src: true
+
+  rescue:
+    - name: Rollback to previous release
+      ansible.builtin.shell: |
+        cp -r /opt/app/backup/* /opt/app/
+        touch /tmp/app.lock
+
+    - name: Notify on failure
+      ansible.builtin.debug:
+        msg: "Deployment failed, rolled back to previous version"
+
+  always:
+    - name: remove the lock file
+      file:
+        path: /tmp/app.lock
+        state: absent
+
