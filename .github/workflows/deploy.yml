@@ -2,7 +2,7 @@ name: Ansible Deploy to Amazon Linux
 
 on:
   push:
-    branches: [main]
+    branches: [master]
   workflow_dispatch:
 
 jobs:
