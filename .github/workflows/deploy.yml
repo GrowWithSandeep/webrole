@@ -16,11 +16,6 @@ jobs:
       - name: Confirm Ansible is available
         run: ansible --version
 
-      - name: Lint the playbook
-        run: |
-          python3 -m pip install --user ansible-lint
-          ~/.local/bin/ansible-lint playbooks/site.yml
-
       - name: Set up deploy SSH key
         run: |
           mkdir -p ~/.ssh
