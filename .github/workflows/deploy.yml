@@ -16,17 +16,8 @@ jobs:
       - name: Confirm Ansible is available
         run: ansible --version
 
-      - name: Set up deploy SSH key
-        run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.DEPLOY_SSH_KEY }}" > ~/.ssh/deploy_key
-          chmod 600 ~/.ssh/deploy_key
-
       - name: Run Ansible playbook
         run: |
           ansible-playbook -i inventory.ini playbooks/site.yml \
             --private-key ~/.ssh/deploy_key
 
-      - name: Clean up SSH key
-        if: always()
-        run: rm -f ~/.ssh/deploy_key
