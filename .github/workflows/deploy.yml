@@ -24,7 +24,7 @@ jobs:
 
       - name: Run Ansible playbook
         run: |
-          ansible-playbook -i inventory/production.ini playbooks/site.yml \
+          ansible-playbook -i inventory.ini playbooks/site.yml \
             --private-key ~/.ssh/deploy_key
 
       - name: Clean up SSH key
