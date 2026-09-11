@@ -7,7 +7,7 @@ on:
 
 jobs:
   deploy:
-    runs-on: [1self]
+    runs-on: [amazon-linux]
 
     steps:
       - name: Checkout repository
